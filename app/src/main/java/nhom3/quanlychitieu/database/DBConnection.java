@@ -13,6 +13,7 @@ public class DBConnection {
     private static String DATABASE_NAME = "data.db";
     private static final String DB_PATH_SUFFIX = "/databases/";
 
+
     public static void xuLiSaoChepSQL(Context context) {
         File file = context.getDatabasePath(DATABASE_NAME);
         if(!file.exists()){
