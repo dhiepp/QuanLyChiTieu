@@ -1,4 +1,4 @@
-package nhom3.quanlychitieu.DAO;
+package nhom3.quanlychitieu.database;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -9,15 +9,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import nhom3.quanlychitieu.Model.KhoanChi;
-import nhom3.quanlychitieu.Model.KhoanThu;
+import nhom3.quanlychitieu.model.KhoanThu;
 
-public class KhoanThuDAO {
+public class KhoanThuData {
 
     private static String DATABASE_NAME = "data.db";
     SQLiteDatabase sqLiteDatabase = null;
 
-    public KhoanThuDAO(Context context){
+    public KhoanThuData(Context context){
         sqLiteDatabase = context.openOrCreateDatabase(DATABASE_NAME,context.MODE_PRIVATE,null);
     }
 

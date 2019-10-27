@@ -1,4 +1,4 @@
-package nhom3.quanlychitieu.Model;
+package nhom3.quanlychitieu.model;
 
 import java.io.Serializable;
 

@@ -1,20 +1,19 @@
-package nhom3.quanlychitieu.DAO;
+package nhom3.quanlychitieu.database;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import nhom3.quanlychitieu.Model.NguonTien;
+import nhom3.quanlychitieu.model.NguonTien;
 
-public class NguonTienDAO {
+public class NguonTienData {
     private static String DATABASE_NAME = "data.db";
     SQLiteDatabase sqLiteDatabase = null;
 
-    public NguonTienDAO(Context context){
+    public NguonTienData(Context context){
         sqLiteDatabase = context.openOrCreateDatabase(DATABASE_NAME,context.MODE_PRIVATE,null);
     }
 

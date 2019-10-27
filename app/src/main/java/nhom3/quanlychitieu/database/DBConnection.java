@@ -1,9 +1,6 @@
-package nhom3.quanlychitieu.db;
+package nhom3.quanlychitieu.database;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -11,9 +8,6 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.ArrayList;
-
-import nhom3.quanlychitieu.Model.NguonTien;
 
 public class DBConnection {
     private static String DATABASE_NAME = "data.db";

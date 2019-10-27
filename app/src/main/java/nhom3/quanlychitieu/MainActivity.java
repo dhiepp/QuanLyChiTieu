@@ -7,11 +7,9 @@ import android.widget.Toast;
 
 import java.util.Date;
 
-import nhom3.quanlychitieu.DAO.KhoanThuDAO;
-import nhom3.quanlychitieu.DAO.NguonTienDAO;
-import nhom3.quanlychitieu.Model.KhoanThu;
-import nhom3.quanlychitieu.Model.NguonTien;
-import nhom3.quanlychitieu.db.DBConnection;
+import nhom3.quanlychitieu.database.KhoanThuData;
+import nhom3.quanlychitieu.model.KhoanThu;
+import nhom3.quanlychitieu.database.DBConnection;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         khoanThu.setNgay(new Date());
         khoanThu.setNtID(1);
         khoanThu.setSoTien(1234);
-        KhoanThuDAO khoanThuDAO = new KhoanThuDAO(MainActivity.this);
+        KhoanThuData khoanThuDAO = new KhoanThuData(MainActivity.this);
         boolean b =khoanThuDAO.themKhoanThu(khoanThu);
         Toast.makeText(MainActivity.this,b+"",Toast.LENGTH_SHORT).show();
     }
