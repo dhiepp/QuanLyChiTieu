@@ -1,5 +1,6 @@
 package nhom3.quanlychitieu;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -41,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
         KhoanThuData khoanThuDAO = new KhoanThuData(MainActivity.this);
         boolean b =khoanThuDAO.themKhoanThu(khoanThu);
         Toast.makeText(MainActivity.this,b+"",Toast.LENGTH_SHORT).show();
+
+
+        new AlertDialog.Builder(this).setTitle("Thông tin nguồn tiền")
+                .setView(getLayoutInflater().inflate(R.layout.dialog_xem_nguon_tien, null, false)).show();
     }
 
     private void initView(){
