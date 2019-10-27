@@ -64,7 +64,6 @@ public class NguonTienData {
 
     public boolean themNguonTien(NguonTien nguonTien) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id",nguonTien.getId());
         contentValues.put("ten",nguonTien.getTen());
         contentValues.put("mieu_ta",nguonTien.getMieuTa());
         contentValues.put("so_du",nguonTien.getSoDu());
