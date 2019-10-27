@@ -37,5 +37,6 @@ public class MainAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment, String title){
         fragmentList.add(fragment);
         fragmentListTitle.add(title);
+        //aaa
     }
 }
