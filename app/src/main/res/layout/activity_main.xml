@@ -7,21 +7,13 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
-
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
+        style="@style/TabStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabIndicator="@android:color/holo_blue_light"
-        app:tabSelectedTextColor="@android:color/holo_blue_light"
-        app:tabTextColor="@android:color/black"
-        >
+        app:tabMode="fixed">
+
     </com.google.android.material.tabs.TabLayout>
 
     <androidx.viewpager.widget.ViewPager
