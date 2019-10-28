@@ -1,6 +1,5 @@
 package nhom3.quanlychitieu;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
@@ -46,6 +45,18 @@ public class MainActivity extends AppCompatActivity {
 //
 //        new AlertDialog.Builder(this).setTitle("Thông tin nguồn tiền")
 //                .setView(getLayoutInflater().inflate(R.layout.dialog_xem_nguon_tien, null, false)).show();
+        DBConnection.xuLiSaoChepSQL(MainActivity.this);
+        KhoanThu khoanThu =new KhoanThu();
+        khoanThu.setId(1);
+        khoanThu.setGhiChu("dfs");
+        khoanThu.setHangMuc("adsd");
+        khoanThu.setNgay(new Date());
+        khoanThu.setNtID(1);
+        khoanThu.setSoTien(1234);
+        KhoanThuData khoanThuDAO = new KhoanThuData(MainActivity.this);
+        boolean b =khoanThuDAO.themKhoanThu(khoanThu);
+        Toast.makeText(MainActivity.this,b+"",Toast.LENGTH_SHORT).show();
+
     }
 
     private void initView(){
@@ -56,13 +67,18 @@ public class MainActivity extends AppCompatActivity {
         viewPager = findViewById(R.id.view_pager);
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());
         // add fragment
-        adapter.addFragment(new NguonTienFragment(),"Nguon Tien");
-        adapter.addFragment(new KhoanThuFragment(),"Khoan Thu");
-        adapter.addFragment(new KhoanChiFragment(),"Khoan chi");
-        adapter.addFragment(new ThongKeFragment(),"Thong Ke");
+        adapter.addFragment(new NguonTienFragment(),"Nguồn Tiền");
+        adapter.addFragment(new KhoanThuFragment(),"Khoản Thu");
+        adapter.addFragment(new KhoanChiFragment(),"Khoản Chi");
+        adapter.addFragment(new ThongKeFragment(),"Thống Kê");
         //adapter setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_account_balance_white_24dp);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_trending_up_white_24dp);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_trending_down_white_24dp);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_insert_chart_white_24dp);
+
 
     }
 }

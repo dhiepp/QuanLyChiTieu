@@ -1,6 +1,7 @@
 package nhom3.quanlychitieu.model;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 
 public class NguonTien implements Serializable {
 
@@ -39,5 +40,9 @@ public class NguonTien implements Serializable {
 
     public void setSoDu(int soDu) {
         this.soDu = soDu;
+    }
+
+    public String getSoDuString() {
+        return NumberFormat.getInstance().format(soDu) + " đ";
     }
 }
