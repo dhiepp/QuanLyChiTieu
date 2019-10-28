@@ -30,7 +30,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
     // add lib
-   // implementation 'com.android.support:design:26.1.0'
+    // implementation 'com.android.support:design:26.1.0'
 }
-
-

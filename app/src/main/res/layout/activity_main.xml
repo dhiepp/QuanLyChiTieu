@@ -8,19 +8,20 @@
     tools:context=".MainActivity">
 
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+<!--    <androidx.appcompat.widget.Toolbar-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        />-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabMode="fixed"
+        android:background="#018577"
         app:tabIndicator="@android:color/holo_blue_light"
         app:tabSelectedTextColor="@android:color/holo_blue_light"
-        app:tabTextColor="@android:color/black"
+        app:tabTextColor="@android:color/white"
         >
     </com.google.android.material.tabs.TabLayout>
 

@@ -31,28 +31,28 @@ public class MainActivity extends AppCompatActivity {
 
         initView();
 
-        DBConnection.xuLiSaoChepSQL(MainActivity.this);
-        KhoanThu khoanThu =new KhoanThu();
-        khoanThu.setId(1);
-        khoanThu.setGhiChu("dfs");
-        khoanThu.setHangMuc("adsd");
-        khoanThu.setNgay(new Date());
-        khoanThu.setNtID(1);
-        khoanThu.setSoTien(1234);
-        KhoanThuData khoanThuDAO = new KhoanThuData(MainActivity.this);
-        boolean b =khoanThuDAO.themKhoanThu(khoanThu);
-        Toast.makeText(MainActivity.this,b+"",Toast.LENGTH_SHORT).show();
-
-
-        new AlertDialog.Builder(this).setTitle("Thông tin nguồn tiền")
-                .setView(getLayoutInflater().inflate(R.layout.dialog_xem_nguon_tien, null, false)).show();
+//        DBConnection.xuLiSaoChepSQL(MainActivity.this);
+//        KhoanThu khoanThu =new KhoanThu();
+//        khoanThu.setId(1);
+//        khoanThu.setGhiChu("dfs");
+//        khoanThu.setHangMuc("adsd");
+//        khoanThu.setNgay(new Date());
+//        khoanThu.setNtID(1);
+//        khoanThu.setSoTien(1234);
+//        KhoanThuData khoanThuDAO = new KhoanThuData(MainActivity.this);
+//        boolean b =khoanThuDAO.themKhoanThu(khoanThu);
+//        Toast.makeText(MainActivity.this,b+"",Toast.LENGTH_SHORT).show();
+//
+//
+//        new AlertDialog.Builder(this).setTitle("Thông tin nguồn tiền")
+//                .setView(getLayoutInflater().inflate(R.layout.dialog_xem_nguon_tien, null, false)).show();
     }
 
     private void initView(){
 
         // add Tab layout main
         tabLayout = findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(viewPager);
+    //    tabLayout.setupWithViewPager(viewPager);
         viewPager = findViewById(R.id.view_pager);
         MainAdapter adapter = new MainAdapter(getSupportFragmentManager());
         // add fragment
@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
         //adapter setup
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
-
-
 
     }
 }
