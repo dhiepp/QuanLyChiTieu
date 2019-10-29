@@ -1,6 +1,7 @@
 package nhom3.quanlychitieu.model;
 
 import java.io.Serializable;
+import java.text.NumberFormat;
 import java.util.Date;
 
 public class KhoanThu implements Serializable {
@@ -50,6 +51,10 @@ public class KhoanThu implements Serializable {
 
     public void setSoTien(int soTien) {
         this.soTien = soTien;
+    }
+
+    public String getSoTienString() {
+        return NumberFormat.getInstance().format(soTien) + " đ";
     }
 
     public int getNtID() {

@@ -47,7 +47,7 @@ public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdap
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nguonTienFragment.xemNguonTienDiaglog(nguonTien);
+                nguonTienFragment.xemNguonTienDialog(nguonTien);
             }
         });
     }

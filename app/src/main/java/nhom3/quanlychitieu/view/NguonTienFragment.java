@@ -67,7 +67,7 @@ public class NguonTienFragment extends Fragment {
         nguonTienListAdapter.update(listNguonTien);
 
         int tsd=0;
-        for (NguonTien nt: listNguonTien) tsd+=nt.getSoDu();
+        for (NguonTien nt: listNguonTien) tsd += nt.getSoDu();
         tong.setText("Tổng số dư: " + NumberFormat.getInstance().format(tsd) + " đ");
     }
 
@@ -86,9 +86,9 @@ public class NguonTienFragment extends Fragment {
         dialog.show();
     }
 
-    public void xemNguonTienDiaglog(NguonTien nguonTien) {
+    public void xemNguonTienDialog(NguonTien nguonTien) {
         View content = getLayoutInflater().inflate(R.layout.dialog_xem_nguon_tien, null, false);
-        AlertDialog dialog = new AlertDialog.Builder(context).setTitle("Xem nguồn tiền").setView(content).create();
+        AlertDialog dialog = new AlertDialog.Builder(context).setTitle("Thông tin nguồn tiền").setView(content).create();
 
         nguonTienControl.xemNguonTien(content, dialog, nguonTien);
         dialog.setOnDismissListener(new DialogInterface.OnDismissListener() {

@@ -75,7 +75,6 @@ public class KhoanThuData {
 
     public boolean themKhoanThu(KhoanThu khoanThu) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put("id",khoanThu.getId());
         contentValues.put("hang_muc",khoanThu.getHangMuc());
         contentValues.put("ghi_chu",khoanThu.getGhiChu());
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
