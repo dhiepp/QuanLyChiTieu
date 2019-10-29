@@ -1,10 +1,6 @@
 package nhom3.quanlychitieu.view;
 
-import android.content.ClipboardManager;
 import android.graphics.Color;
-import android.graphics.ColorFilter;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.VectorDrawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,55 +17,39 @@ import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.model.NguonTien;
 
 public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdapter.NguonTienListViewHolder> {
-    private ArrayList<NguonTien> listNguonTien = new ArrayList<>();
-    private String dataType;
+    private NguonTienFragment nguonTienFragment;
+    private ArrayList<NguonTien> listNguonTien;
 
-    public NguonTienListAdapter(ArrayList<NguonTien> ntl) {
-        listNguonTien = ntl;
-//        NguonTien nguonTien = new NguonTien();
-//        nguonTien.setTen("Hello");
-//        nguonTien.setSoDu(990000);
-//        nguonTien.setMieuTa("Cuong 2 an dau buoi");
-//        NguonTien nguonTien2 = new NguonTien();
-//        nguonTien2.setTen("Bitches");
-//        nguonTien2.setSoDu(880000);
-//        nguonTien2.setMieuTa("Cuong 2 an dau cut");
-//        NguonTien nguonTien3 = new NguonTien();
-//        nguonTien3.setTen("Bitches");
-//        nguonTien3.setSoDu(880000);
-//        nguonTien3.setMieuTa("Cuong 2 an dau cut");
-//        listNguonTien.add(nguonTien);
-//        listNguonTien.add(nguonTien2);
-//        listNguonTien.add(nguonTien3);
+    public NguonTienListAdapter(NguonTienFragment nguonTienFragment) {
+        this.nguonTienFragment = nguonTienFragment;
+    }
+
+    public void update(ArrayList<NguonTien> listNguonTien) {
+        this.listNguonTien = listNguonTien;
+        notifyDataSetChanged();
     }
 
     @NonNull
     @Override
     public NguonTienListViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View dataRow = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_nguon_tien, parent, false);
-
-
-        dataRow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        return new NguonTienListViewHolder(dataRow);
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_nguon_tien, parent, false);
+        return new NguonTienListViewHolder(item);
     }
 
     @Override
     public void onBindViewHolder(@NonNull NguonTienListViewHolder holder, int position) {
-        NguonTien nguonTien = listNguonTien.get(position);
+        final NguonTien nguonTien = listNguonTien.get(position);
         holder.ten.setText(nguonTien.getTen());
         holder.soDu.setText(String.valueOf(nguonTien.getSoDuString()));
         holder.mieuTa.setText(nguonTien.getMieuTa());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Random random = new Random();
-            int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-            holder.icon.getBackground().setTint(color);
-        }
 
+        //Event click item
+        holder.view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nguonTienFragment.xemNguonTienDiaglog(nguonTien);
+            }
+        });
     }
 
     @Override
@@ -78,6 +58,7 @@ public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdap
     }
 
     public static class NguonTienListViewHolder extends RecyclerView.ViewHolder {
+        public View view;
         public TextView icon;
         public TextView ten;
         public TextView soDu;
@@ -86,10 +67,18 @@ public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdap
         public NguonTienListViewHolder(View v) {
             super(v);
 
+            view = v;
             icon = v.findViewById(R.id.LNT_icon);
             ten = v.findViewById(R.id.LNT_ten);
             soDu = v.findViewById(R.id.LNT_so_du);
             mieuTa = v.findViewById(R.id.LNT_mieu_ta);
+
+            //Mau sac icon ngau nhien
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Random random = new Random();
+                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+                icon.getBackground().setTint(color);
+            }
         }
     }
 }
