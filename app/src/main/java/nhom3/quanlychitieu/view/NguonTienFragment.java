@@ -4,16 +4,15 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -45,7 +44,7 @@ public class NguonTienFragment extends Fragment {
         tong = root.findViewById(R.id.NT_total);
         addBtn = root.findViewById(R.id.NT_add);
 
-        //Xu ly danh sach nguon tien
+        //Xử lý hiển thị danh sách nguồn tiền
         RecyclerView listData = root.findViewById(R.id.NT_list);
         listData.setAdapter(nguonTienRecyclerAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
@@ -72,6 +71,7 @@ public class NguonTienFragment extends Fragment {
         ArrayList<NguonTien> listNguonTien = nguonTienControl.getListNguonTien();
         nguonTienRecyclerAdapter.update(listNguonTien);
 
+        //Tính và hiển thị tổng số dư
         int tsd=0;
         for (NguonTien nt: listNguonTien) tsd += nt.getSoDu();
         tong.setText("Tổng số dư: " + NumberFormat.getInstance().format(tsd) + " đ");

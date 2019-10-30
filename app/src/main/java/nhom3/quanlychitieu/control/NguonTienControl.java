@@ -38,7 +38,7 @@ public class NguonTienControl {
         luuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Xu li ngoai le: chua nhap du
+                //Xử lý ngoại lệ: chưa nhập đủ
                 if (ten.length()==0 || mieuTa.length()==0 || soDu.length()==0) {
                     Toast.makeText(dialog.getContext(), "Bạn phải nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
@@ -49,7 +49,7 @@ public class NguonTienControl {
                 nguonTien.setTen(ten.getText().toString());
                 nguonTien.setMieuTa(mieuTa.getText().toString());
 
-                //Xu li ngoai le: them ko thanh cong
+                //Xử lý ngoại lệ: thêm không thành công
                 if (!nguonTienData.themNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Thêm nguồn tiền không thành công!", Toast.LENGTH_SHORT).show();
                 };
@@ -80,7 +80,7 @@ public class NguonTienControl {
         luuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Xu li ngoai le: chua nhap du
+                //Xử lý ngoại lệ: chưa nhập đủ
                 if (ten.length()==0 || mieuTa.length()==0 || soDu.length()==0) {
                     Toast.makeText(dialog.getContext(), "Bạn phải nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
@@ -90,7 +90,7 @@ public class NguonTienControl {
                 nguonTien.setTen(ten.getText().toString());
                 nguonTien.setMieuTa(mieuTa.getText().toString());
 
-                //Xu li ngoai le: sua khong thanh cong
+                //Xử lý ngoại lệ: sửa không thành công
                 if (!nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Sửa nguồn tiền không thành công!", Toast.LENGTH_SHORT).show();
                 };
@@ -103,7 +103,7 @@ public class NguonTienControl {
             public void onClick(View v) {
                 String id = String.valueOf(nguonTien.getId());
 
-                //Xu li ngoai le: xoa khong thanh cong
+                //Xử lý ngoại lệ: xóa không thành công
                 if (!nguonTienData.xoaNguonTien(id)) {
                     Toast.makeText(dialog.getContext(), "Xóa nguồn tiền không thành công!", Toast.LENGTH_SHORT).show();
                 };

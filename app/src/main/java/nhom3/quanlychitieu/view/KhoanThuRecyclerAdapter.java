@@ -8,22 +8,19 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Random;
 
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.model.KhoanThu;
 
-public class KhoanThuListAdapter extends RecyclerView.Adapter<KhoanThuListAdapter.KhoanThuListViewHolder> {
+public class KhoanThuRecyclerAdapter extends RecyclerView.Adapter<KhoanThuRecyclerAdapter.KhoanThuListViewHolder> {
     private KhoanThuFragment khoanThuFragment;
     private ArrayList<KhoanThu> listKhoanThu;
 
-    public KhoanThuListAdapter(KhoanThuFragment khoanThuFragment) {
+    public KhoanThuRecyclerAdapter(KhoanThuFragment khoanThuFragment) {
         this.khoanThuFragment = khoanThuFragment;
     }
 
@@ -40,15 +37,15 @@ public class KhoanThuListAdapter extends RecyclerView.Adapter<KhoanThuListAdapte
     }
 
     @Override
-    public void onBindViewHolder(@NonNull KhoanThuListViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final KhoanThuListViewHolder holder, int position) {
         final KhoanThu khoanThu = listKhoanThu.get(position);
 
         holder.hangMuc.setText(khoanThu.getHangMuc());
         holder.soTien.setText(khoanThu.getSoTienString());
-        holder.ngay.setText(DateFormat.getDateInstance().format(khoanThu.getNgay()));
+        holder.ngay.setText(khoanThu.getNgayString());
         holder.ghiChu.setText(khoanThu.getGhiChu());
 
-        //Event click item
+        //Sự kiện click vào item
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -78,7 +75,7 @@ public class KhoanThuListAdapter extends RecyclerView.Adapter<KhoanThuListAdapte
             ngay = v.findViewById(R.id.LKH_ngay);
             ghiChu = v.findViewById(R.id.LKH_ghi_chu);
 
-            //Mau sac icon ngau nhien
+            //Màu sắc icon ngẫu nhiên
             TextView icon = v.findViewById(R.id.LKH_icon);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Random random = new Random();

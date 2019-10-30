@@ -4,7 +4,6 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -13,8 +12,8 @@ import nhom3.quanlychitieu.model.NguonTien;
 public class NguonTienArrayAdapter extends ArrayAdapter<String> {
     private ArrayList<NguonTien> nguonTienList;
 
-    public NguonTienArrayAdapter(@NonNull Context context, int resource) {
-        super(context, resource);
+    public NguonTienArrayAdapter(@NonNull Context context) {
+        super(context, android.R.layout.simple_spinner_dropdown_item);
 
         NguonTienControl nguonTienControl = new NguonTienControl(context);
         nguonTienList = nguonTienControl.getListNguonTien();
@@ -25,14 +24,5 @@ public class NguonTienArrayAdapter extends ArrayAdapter<String> {
 
     public NguonTien getNguonTien(int position) {
         return nguonTienList.get(position);
-    }
-
-    public int getPositionByID(int id) {
-        for (int i=0; i<nguonTienList.size(); i++) {
-            if (nguonTienList.get(i).getId() == id) {
-                return i;
-            }
-        }
-        return -1;
     }
 }

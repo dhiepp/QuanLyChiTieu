@@ -15,6 +15,8 @@ public class NguonTienData {
 
     public NguonTienData(Context context){
         sqLiteDatabase = context.openOrCreateDatabase(DATABASE_NAME,context.MODE_PRIVATE,null);
+        //Bật hỗ trợ Khóa Ngoại cho SQLite
+        sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON");
     }
 
     public ArrayList<NguonTien> getAllNguonTien() {

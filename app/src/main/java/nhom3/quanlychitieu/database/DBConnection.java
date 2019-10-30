@@ -19,10 +19,9 @@ public class DBConnection {
         if(!file.exists()){
             try {
                 copyData(context);
-                Toast.makeText(context,"Sucess",Toast.LENGTH_SHORT).show();
             }
             catch (Exception e){
-                Toast.makeText(context,e.toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Có lỗi khi copy CSDL: " + e.toString(),Toast.LENGTH_SHORT).show();
             }
         }
     }

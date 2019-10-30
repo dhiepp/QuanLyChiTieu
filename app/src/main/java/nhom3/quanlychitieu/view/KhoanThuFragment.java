@@ -5,30 +5,26 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import nhom3.quanlychitieu.R;
-import nhom3.quanlychitieu.control.KhoanThuControl;
 import nhom3.quanlychitieu.control.KhoanThuControl;
 import nhom3.quanlychitieu.model.KhoanThu;
 
 public class KhoanThuFragment extends Fragment {
     private KhoanThuControl khoanThuControl;
-    private KhoanThuListAdapter khoanThuListAdapter;
+    private KhoanThuRecyclerAdapter khoanThuRecyclerAdapter;
 
     private Context context;
     private FloatingActionButton addBtn;
@@ -41,13 +37,13 @@ public class KhoanThuFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_khoan_thu, container, false);
         context = root.getContext();
         khoanThuControl = new KhoanThuControl(context);
-        khoanThuListAdapter = new KhoanThuListAdapter(this);
+        khoanThuRecyclerAdapter = new KhoanThuRecyclerAdapter(this);
 
         addBtn = root.findViewById(R.id.KT_add);
 
-        //Xu ly danh sach khoan thu
+        //Xử lý hiển thị danh sách khoản thu
         RecyclerView listData = root.findViewById(R.id.KT_list);
-        listData.setAdapter(khoanThuListAdapter);
+        listData.setAdapter(khoanThuRecyclerAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         listData.setLayoutManager(layoutManager);
         listData.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.VERTICAL));
@@ -63,9 +59,15 @@ public class KhoanThuFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateListData();
+    }
+
     public void updateListData() {
         ArrayList<KhoanThu> listKhoanThu = khoanThuControl.getListKhoanThu();
-        khoanThuListAdapter.update(listKhoanThu);
+        khoanThuRecyclerAdapter.update(listKhoanThu);
     }
 
     public void themKhoanThuDialog() {

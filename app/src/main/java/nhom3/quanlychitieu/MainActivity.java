@@ -1,17 +1,13 @@
 package nhom3.quanlychitieu;
 
+import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
-import android.os.Bundle;
-
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.Date;
-
 import nhom3.quanlychitieu.database.DBConnection;
-import nhom3.quanlychitieu.database.KhoanThuData;
-import nhom3.quanlychitieu.model.KhoanThu;
 import nhom3.quanlychitieu.view.KhoanChiFragment;
 import nhom3.quanlychitieu.view.KhoanThuFragment;
 import nhom3.quanlychitieu.view.NguonTienFragment;
@@ -36,15 +32,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tab_layout);
         viewPager = findViewById(R.id.view_pager);
 
-        //Tao Adapter va them fragment
+        //Tạo Adapter và thêm Fragment
         MainFragmentPagerAdapter adapter = new MainFragmentPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new NguonTienFragment(),"Nguồn Tiền");
         adapter.addFragment(new KhoanThuFragment(),"Khoản Thu");
         adapter.addFragment(new KhoanChiFragment(),"Khoản Chi");
         adapter.addFragment(new ThongKeFragment(),"Thống Kê");
 
-        //Setup TabLayout voi Adapter
+        //Setup TabLayout với Adapter
         viewPager.setAdapter(adapter);
+        //Giữ cho các Fragment không bị Destroy
         viewPager.setOffscreenPageLimit(adapter.getCount());
 
         //Set icon cho tab

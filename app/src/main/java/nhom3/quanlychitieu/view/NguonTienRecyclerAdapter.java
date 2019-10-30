@@ -43,7 +43,7 @@ public class NguonTienRecyclerAdapter extends RecyclerView.Adapter<NguonTienRecy
         holder.soDu.setText(nguonTien.getSoDuString());
         holder.mieuTa.setText(nguonTien.getMieuTa());
 
-        //Event click item
+        //Sự kiện click item
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,7 +71,7 @@ public class NguonTienRecyclerAdapter extends RecyclerView.Adapter<NguonTienRecy
             soDu = v.findViewById(R.id.LNT_so_du);
             mieuTa = v.findViewById(R.id.LNT_mieu_ta);
 
-            //Mau sac icon ngau nhien
+            //Màu sắc icon ngẫu nhiên
             TextView icon = v.findViewById(R.id.LNT_icon);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Random random = new Random();

@@ -10,10 +10,8 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Locale;
 
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.database.KhoanThuData;
@@ -40,10 +38,10 @@ public class KhoanThuControl {
         Button luuBtn = content.findViewById(R.id.TKH_luu);
         Button huyBtn = content.findViewById(R.id.TKH_huy);
 
-        final NguonTienArrayAdapter nguonTienArrayAdapter = new NguonTienArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item);
+        final NguonTienArrayAdapter nguonTienArrayAdapter = new NguonTienArrayAdapter(context);
         nguonTienSpinner.setAdapter(nguonTienArrayAdapter);
 
-        //Xu li chon ngay
+        //Xử lý chọn ngày
         final Calendar selectedDate = Calendar.getInstance();
         ngayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,12 +60,13 @@ public class KhoanThuControl {
         luuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Xu li ngoai le: chua nhap du
+                //Xử lý ngoại lệ: chưa nhập đủ
                 if (hangMuc.length()==0 || soTien.length()==0) {
                     Toast.makeText(dialog.getContext(), "Bạn phải nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
+                //Lấy nguồn tiền đã chọn
                 NguonTienControl nguonTienControl = new NguonTienControl(context);
                 NguonTien nguonTien = nguonTienArrayAdapter.getNguonTien(nguonTienSpinner.getSelectedItemPosition());
                 int tienThu = Integer.parseInt(soTien.getText().toString());
@@ -79,10 +78,10 @@ public class KhoanThuControl {
                 khoanThu.setGhiChu(ghiChu.getText().toString());
                 khoanThu.setSoTien(tienThu);
 
-                //Them so du nen cong them
+                //Cộng thêm số dư từ khoản thu
                 nguonTien.setSoDu(nguonTien.getSoDu() + tienThu);
 
-                //Xu li ngoai le: them ko thanh cong
+                //Xử lý ngoại lệ: thêm không thành công
                 if (!khoanThuData.themKhoanThu(khoanThu) || !nguonTienControl.suaNguonTien(nguonTien)) {
                     Toast.makeText(context, "Thêm khoản thu không thành công!", Toast.LENGTH_SHORT).show();
                 };
@@ -100,7 +99,7 @@ public class KhoanThuControl {
 
     public void xemKhoanThu(final View content, final AlertDialog dialog, final KhoanThu khoanThu) {
         final Context context = dialog.getContext();
-        final Spinner nguonTienSpinner = content.findViewById(R.id.XKH_nguon_tien);
+        final EditText nguonTienTxt = content.findViewById(R.id.XKH_nguon_tien);
         final Button ngayBtn = content.findViewById(R.id.XKH_ngay);
         final EditText hangMuc = content.findViewById(R.id.XKH_hang_muc);
         final EditText ghiChu = content.findViewById(R.id.XKH_ghi_chu);
@@ -109,17 +108,19 @@ public class KhoanThuControl {
         Button xoaBtn = content.findViewById(R.id.XKH_xoa);
         Button huyBtn = content.findViewById(R.id.XKH_huy);
 
-        final NguonTienArrayAdapter nguonTienArrayAdapter = new NguonTienArrayAdapter(context, android.R.layout.simple_spinner_dropdown_item);
-        nguonTienSpinner.setAdapter(nguonTienArrayAdapter);
+        //Đặt nguồn tiền theo ID (Không cho thay đổi)
+        final NguonTienControl nguonTienControl = new NguonTienControl(context);
+        final NguonTien nguonTien = nguonTienControl.getNguonTienByID(khoanThu.getNtID());
+        nguonTienTxt.setText(nguonTien.getTen());
+        nguonTienTxt.setEnabled(false);
 
-        //Dat Nguon Tien dang chon theo ID
-        nguonTienSpinner.setSelection(nguonTienArrayAdapter.getPositionByID(khoanThu.getNtID()));
+        //Đặt các thông tin đã có
         ngayBtn.setText(khoanThu.getNgayString());
         hangMuc.setText(khoanThu.getHangMuc());
         ghiChu.setText(khoanThu.getGhiChu());
         soTien.setText(String.valueOf(khoanThu.getSoTien()));
 
-        //Xu li chon ngay
+        //Xử lý chọn ngày
         final Calendar selectedDate = Calendar.getInstance();
         selectedDate.setTime(khoanThu.getNgay());
         ngayBtn.setOnClickListener(new View.OnClickListener() {
@@ -139,29 +140,25 @@ public class KhoanThuControl {
         luuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Xu li ngoai le: chua nhap du
+                //Xử lý ngoại lệ: chưa nhập đủ
                 if (hangMuc.length()==0 || soTien.length()==0) {
                     Toast.makeText(dialog.getContext(), "Bạn phải nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                NguonTienControl nguonTienControl = new NguonTienControl(context);
-                NguonTien nguonTien = nguonTienArrayAdapter.getNguonTien(nguonTienSpinner.getSelectedItemPosition());
 
+                //Số tiền điều chỉnh = số tiền mới nhập trừ đi số tiền cũ
                 int tienThu = Integer.parseInt(soTien.getText().toString());
-                //So tien duoc dieu chinh = so tien moi tru di so tien cu
                 int tienChinh = tienThu - khoanThu.getSoTien();
 
-                KhoanThu khoanThu = new KhoanThu();
-                khoanThu.setNtID(nguonTien.getId());
                 khoanThu.setNgay(selectedDate.getTime());
                 khoanThu.setHangMuc(hangMuc.getText().toString());
                 khoanThu.setGhiChu(ghiChu.getText().toString());
                 khoanThu.setSoTien(tienThu);
 
-                //Dieu chinh so tien
+                //Điều chỉnh số tiền của nguồn tiền
                 nguonTien.setSoDu(nguonTien.getSoDu() + tienChinh);
 
-                //Xu li ngoai le: sua ko thanh cong
+                //Xử lý ngoại lệ: sửa không thành công
                 if (!khoanThuData.suaKhoanThu(khoanThu) || !nguonTienControl.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Sửa khoản thu không thành công!", Toast.LENGTH_SHORT).show();
                 };
@@ -172,13 +169,11 @@ public class KhoanThuControl {
         xoaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NguonTienControl nguonTienControl = new NguonTienControl(context);
-                NguonTien nguonTien = nguonTienArrayAdapter.getNguonTien(nguonTienSpinner.getSelectedItemPosition());
-                //Vi xoa nen phai tru di so tien thu dc
+                //Vì xóa nên phải trừ đi số tiền của khoản thu
                 int tienChinh = Integer.parseInt(soTien.getText().toString());
                 nguonTien.setSoDu(nguonTien.getSoDu() - tienChinh);
 
-                //Xu li ngoai le: xoa ko thanh cong
+                //Xử lý ngoại lệ: xóa không thành công
                 if (!khoanThuData.xoaKhoanThu(String.valueOf(khoanThu.getId())) || !nguonTienControl.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Xóa khoản thu không thành công!", Toast.LENGTH_SHORT).show();
                 };
