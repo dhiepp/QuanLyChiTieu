@@ -9,13 +9,9 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.Calendar;
 
-import nhom3.quanlychitieu.MainActivity;
 import nhom3.quanlychitieu.R;
-import nhom3.quanlychitieu.view.ThongKeFragment;
 
 public class ThongKeControl implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 

@@ -19,6 +19,7 @@ public class KhoanChiData {
     SQLiteDatabase sqLiteDatabase = null;
     private SimpleDateFormat dateFormat;
 
+
     public KhoanChiData(Context context){
         sqLiteDatabase = context.openOrCreateDatabase(DATABASE_NAME,context.MODE_PRIVATE,null);
         dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
