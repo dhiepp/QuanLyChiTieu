@@ -26,7 +26,7 @@ import nhom3.quanlychitieu.model.NguonTien;
 
 public class NguonTienFragment extends Fragment {
     private NguonTienControl nguonTienControl;
-    private NguonTienListAdapter nguonTienListAdapter;
+    private NguonTienRecyclerAdapter nguonTienRecyclerAdapter;
 
     private Context context;
     private TextView tong;
@@ -40,17 +40,17 @@ public class NguonTienFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_nguon_tien, container, false);
         context = root.getContext();
         nguonTienControl = new NguonTienControl(context);
-        nguonTienListAdapter = new NguonTienListAdapter(this);
+        nguonTienRecyclerAdapter = new NguonTienRecyclerAdapter(this);
 
         tong = root.findViewById(R.id.NT_total);
         addBtn = root.findViewById(R.id.NT_add);
 
+        //Xu ly danh sach nguon tien
         RecyclerView listData = root.findViewById(R.id.NT_list);
-        listData.setAdapter(nguonTienListAdapter);
+        listData.setAdapter(nguonTienRecyclerAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         listData.setLayoutManager(layoutManager);
         listData.addItemDecoration(new DividerItemDecoration(context,DividerItemDecoration.VERTICAL));
-        updateListData();
 
         addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,9 +62,15 @@ public class NguonTienFragment extends Fragment {
         return root;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        updateListData();
+    }
+
     public void updateListData() {
         ArrayList<NguonTien> listNguonTien = nguonTienControl.getListNguonTien();
-        nguonTienListAdapter.update(listNguonTien);
+        nguonTienRecyclerAdapter.update(listNguonTien);
 
         int tsd=0;
         for (NguonTien nt: listNguonTien) tsd += nt.getSoDu();
