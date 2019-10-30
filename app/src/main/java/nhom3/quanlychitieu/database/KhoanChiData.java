@@ -5,9 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Locale;
 
 import nhom3.quanlychitieu.model.KhoanChi;
 
@@ -15,9 +17,11 @@ public class KhoanChiData {
 
     private static String DATABASE_NAME = "data.db";
     SQLiteDatabase sqLiteDatabase = null;
+    private SimpleDateFormat dateFormat;
 
     public KhoanChiData(Context context){
         sqLiteDatabase = context.openOrCreateDatabase(DATABASE_NAME,context.MODE_PRIVATE,null);
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     }
 
 
@@ -29,9 +33,12 @@ public class KhoanChiData {
             int id = cursor.getInt(0);
             String hangMuc = cursor.getString(1);
             String ghiChu = cursor.getString(2);
-            Date ngay = new Date(cursor.getLong(3)*1000);
+            String dateString = cursor.getString(3);
+            Date ngay = new Date();
+            try {ngay = dateFormat.parse(dateString);} catch (ParseException e) {}
             int soTien = cursor.getInt(4);
             int ntID = cursor.getInt(5);
+
             KhoanChi khoanChi = new KhoanChi();
             khoanChi.setId(id);
             khoanChi.setNgay(ngay);
@@ -59,8 +66,7 @@ public class KhoanChiData {
         ContentValues contentValues = new ContentValues();
         contentValues.put("hang_muc",khoanChi.getHangMuc());
         contentValues.put("ghi_chu",khoanChi.getGhiChu());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String ngay = sdf.format(khoanChi.getNgay());
+        String ngay = dateFormat.format(khoanChi.getNgay());
         contentValues.put("ngay",ngay);
         contentValues.put("so_tien",khoanChi.getSoTien());
         contentValues.put("ntID",khoanChi.getNtID());
@@ -77,8 +83,7 @@ public class KhoanChiData {
         ContentValues contentValues = new ContentValues();
         contentValues.put("hang_muc",khoanChi.getHangMuc());
         contentValues.put("ghi_chu",khoanChi.getGhiChu());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String ngay = sdf.format(khoanChi.getNgay());
+        String ngay = dateFormat.format(khoanChi.getNgay());
         contentValues.put("ngay",ngay);
         contentValues.put("so_tien",khoanChi.getSoTien());
         contentValues.put("ntID",khoanChi.getNtID());

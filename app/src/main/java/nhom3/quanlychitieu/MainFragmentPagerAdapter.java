@@ -8,15 +8,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import java.util.ArrayList;
 
 
-public class MainAdapter extends FragmentPagerAdapter {
-
+public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
     private final ArrayList<Fragment> fragmentList = new ArrayList<>();
     private final ArrayList<String> fragmentListTitle = new ArrayList<>();
 
-    public MainAdapter(FragmentManager fm) {
-        super(fm);
+    public MainFragmentPagerAdapter(FragmentManager fm) {
+        super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
     }
-
 
     @Override
     public Fragment getItem(int position) {
@@ -37,6 +35,5 @@ public class MainAdapter extends FragmentPagerAdapter {
     public void addFragment(Fragment fragment, String title){
         fragmentList.add(fragment);
         fragmentListTitle.add(title);
-        //aaa
     }
 }

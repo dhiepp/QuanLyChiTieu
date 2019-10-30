@@ -2,7 +2,9 @@ package nhom3.quanlychitieu.model;
 
 import java.io.Serializable;
 import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class KhoanThu implements Serializable {
 
@@ -44,6 +46,8 @@ public class KhoanThu implements Serializable {
     public void setNgay(Date ngay) {
         this.ngay = ngay;
     }
+
+    public String getNgayString() { return new SimpleDateFormat("dd-MM-yyyy", Locale.US).format(ngay); }
 
     public int getSoTien() {
         return soTien;

@@ -15,8 +15,9 @@ public class NguonTienData {
 
     public NguonTienData(Context context){
         sqLiteDatabase = context.openOrCreateDatabase(DATABASE_NAME,context.MODE_PRIVATE,null);
+        //Bật hỗ trợ Khóa Ngoại cho SQLite
+        sqLiteDatabase.execSQL("PRAGMA foreign_keys=ON");
     }
-
 
     public ArrayList<NguonTien> getAllNguonTien() {
         Cursor cursor = sqLiteDatabase.query("NGUONTIEN",null,null,null,null,null,null);
@@ -27,6 +28,7 @@ public class NguonTienData {
             String ten = cursor.getString(1);
             String mieuTa = cursor.getString(2);
             int soDu = cursor.getInt(3);
+
             NguonTien nguonTien = new NguonTien();
             nguonTien.setId(id);
             nguonTien.setTen(ten);
@@ -36,6 +38,25 @@ public class NguonTienData {
         }
         cursor.close();
         return  arrayList;
+    }
+
+    public NguonTien getNguonTienByID(int id) {
+        Cursor cursor = sqLiteDatabase.query("NGUONTIEN",null,"id=" + id,
+                null,null,null,null);
+        NguonTien nguonTien = null;
+        while (cursor.moveToNext()){
+            String ten = cursor.getString(1);
+            String mieuTa = cursor.getString(2);
+            int soDu = cursor.getInt(3);
+
+            nguonTien = new NguonTien();
+            nguonTien.setId(id);
+            nguonTien.setTen(ten);
+            nguonTien.setMieuTa(mieuTa);
+            nguonTien.setSoDu(soDu);
+        }
+        cursor.close();
+        return nguonTien;
     }
 
     public boolean xoaNguonTien(String id) {
@@ -49,11 +70,12 @@ public class NguonTienData {
     }
 
     public boolean suaNguonTien(NguonTien nguonTien) {
+        String id = String.valueOf(nguonTien.getId());
         ContentValues contentValues = new ContentValues();
         contentValues.put("ten",nguonTien.getTen());
         contentValues.put("mieu_ta",nguonTien.getMieuTa());
         contentValues.put("so_du",nguonTien.getSoDu());
-        long kq= sqLiteDatabase.update("NGUONTIEN",contentValues,"id = ?",new String[]{nguonTien.getId()+""});
+        long kq= sqLiteDatabase.update("NGUONTIEN",contentValues,"id = ?",new String[]{id});
         if(kq >0){
             return true;
         }

@@ -16,11 +16,11 @@ import java.util.Random;
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.model.NguonTien;
 
-public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdapter.NguonTienListViewHolder> {
+public class NguonTienRecyclerAdapter extends RecyclerView.Adapter<NguonTienRecyclerAdapter.NguonTienListViewHolder> {
     private NguonTienFragment nguonTienFragment;
     private ArrayList<NguonTien> listNguonTien;
 
-    public NguonTienListAdapter(NguonTienFragment nguonTienFragment) {
+    public NguonTienRecyclerAdapter(NguonTienFragment nguonTienFragment) {
         this.nguonTienFragment = nguonTienFragment;
     }
 
@@ -40,10 +40,10 @@ public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdap
     public void onBindViewHolder(@NonNull NguonTienListViewHolder holder, int position) {
         final NguonTien nguonTien = listNguonTien.get(position);
         holder.ten.setText(nguonTien.getTen());
-        holder.soDu.setText(String.valueOf(nguonTien.getSoDuString()));
+        holder.soDu.setText(nguonTien.getSoDuString());
         holder.mieuTa.setText(nguonTien.getMieuTa());
 
-        //Event click item
+        //Sự kiện click item
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,7 +59,6 @@ public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdap
 
     public static class NguonTienListViewHolder extends RecyclerView.ViewHolder {
         public View view;
-        public TextView icon;
         public TextView ten;
         public TextView soDu;
         public TextView mieuTa;
@@ -68,12 +67,12 @@ public class NguonTienListAdapter extends RecyclerView.Adapter<NguonTienListAdap
             super(v);
 
             view = v;
-            icon = v.findViewById(R.id.LNT_icon);
             ten = v.findViewById(R.id.LNT_ten);
             soDu = v.findViewById(R.id.LNT_so_du);
             mieuTa = v.findViewById(R.id.LNT_mieu_ta);
 
-            //Mau sac icon ngau nhien
+            //Màu sắc icon ngẫu nhiên
+            TextView icon = v.findViewById(R.id.LNT_icon);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Random random = new Random();
                 int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
