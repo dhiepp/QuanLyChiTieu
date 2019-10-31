@@ -10,19 +10,14 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import nhom3.quanlychitieu.R;
-import nhom3.quanlychitieu.database.KhoanChiData;
-import nhom3.quanlychitieu.database.KhoanThuData;
 import nhom3.quanlychitieu.database.NguonTienData;
 import nhom3.quanlychitieu.model.NguonTien;
 
 public class NguonTienControl {
     private NguonTienData nguonTienData;
 
-    private KhoanThuData khoanThuData;
-
     public NguonTienControl(Context context) {
         nguonTienData = new NguonTienData(context);
-        khoanThuData = new KhoanThuData(context);
     }
 
     public ArrayList<NguonTien> getListNguonTien() {
@@ -109,7 +104,7 @@ public class NguonTienControl {
                 String id = String.valueOf(nguonTien.getId());
 
                 //Xử lý ngoại lệ: xóa không thành công
-                if (!nguonTienData.xoaNguonTien(id) || !khoanThuData.xọaKhoanThuByNguonTien(id)) {
+                if (!nguonTienData.xoaNguonTien(id)) {
                     Toast.makeText(dialog.getContext(), "Xóa nguồn tiền không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();

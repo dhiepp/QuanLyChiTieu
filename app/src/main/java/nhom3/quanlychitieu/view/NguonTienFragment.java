@@ -88,6 +88,7 @@ public class NguonTienFragment extends Fragment {
                 updateListData();
             }
         });
+
         dialog.show();
     }
 

@@ -12,7 +12,6 @@ import java.util.Date;
 import java.util.Locale;
 
 import nhom3.quanlychitieu.model.KhoanThu;
-import nhom3.quanlychitieu.model.NguonTien;
 
 public class KhoanThuData {
 
@@ -94,17 +93,6 @@ public class KhoanThuData {
         }
         else {
             return false;
-        }
-    }
-
-    public boolean xọaKhoanThuByNguonTien(String ntID){
-        try{
-            sqLiteDatabase.delete("KHOANTHU","ntID=?",new String[]{ntID});
-            return true;
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return  false;
         }
     }
 }
