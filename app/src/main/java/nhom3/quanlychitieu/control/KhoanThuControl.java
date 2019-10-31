@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.database.KhoanThuData;
+import nhom3.quanlychitieu.database.NguonTienData;
 import nhom3.quanlychitieu.model.KhoanThu;
 import nhom3.quanlychitieu.model.NguonTien;
 
@@ -24,13 +25,11 @@ public class KhoanThuControl {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
     private KhoanThuData khoanThuData;
+    private NguonTienData nguonTienData;
 
     public KhoanThuControl(Context context) {
         khoanThuData = new KhoanThuData(context);
-    }
-
-    public ArrayList<KhoanThu> getListKhoanThu() {
-        return khoanThuData.getAllKhoanThu();
+        nguonTienData = new NguonTienData(context);
     }
 
     public void themKhoanThu(final View content, final AlertDialog dialog) {
@@ -72,7 +71,6 @@ public class KhoanThuControl {
                 }
 
                 //Lấy nguồn tiền đã chọn
-                NguonTienControl nguonTienControl = new NguonTienControl(context);
                 NguonTien nguonTien = nguonTienArrayAdapter.getNguonTien(nguonTienSpinner.getSelectedItemPosition());
                 int tienThu = Integer.parseInt(soTien.getText().toString());
 
@@ -87,7 +85,7 @@ public class KhoanThuControl {
                 nguonTien.setSoDu(nguonTien.getSoDu() + tienThu);
 
                 //Xử lý ngoại lệ: thêm không thành công
-                if (!khoanThuData.themKhoanThu(khoanThu) || !nguonTienControl.suaNguonTien(nguonTien)) {
+                if (!khoanThuData.themKhoanThu(khoanThu) || !nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(context, "Thêm khoản thu không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();
@@ -114,8 +112,7 @@ public class KhoanThuControl {
         Button huyBtn = content.findViewById(R.id.XKH_huy);
 
         //Đặt nguồn tiền theo ID (Không cho thay đổi)
-        final NguonTienControl nguonTienControl = new NguonTienControl(context);
-        final NguonTien nguonTien = nguonTienControl.getNguonTienByID(khoanThu.getNtID());
+        final NguonTien nguonTien = nguonTienData.getNguonTienByID(khoanThu.getNtID());
         nguonTienTxt.setText(nguonTien.getTen());
         nguonTienTxt.setEnabled(false);
 
@@ -164,7 +161,7 @@ public class KhoanThuControl {
                 nguonTien.setSoDu(nguonTien.getSoDu() + tienChinh);
 
                 //Xử lý ngoại lệ: sửa không thành công
-                if (!khoanThuData.suaKhoanThu(khoanThu) || !nguonTienControl.suaNguonTien(nguonTien)) {
+                if (!khoanThuData.suaKhoanThu(khoanThu) || !nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Sửa khoản thu không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();
@@ -179,7 +176,7 @@ public class KhoanThuControl {
                 nguonTien.setSoDu(nguonTien.getSoDu() - tienChinh);
 
                 //Xử lý ngoại lệ: xóa không thành công
-                if (!khoanThuData.xoaKhoanThu(String.valueOf(khoanThu.getId())) || !nguonTienControl.suaNguonTien(nguonTien)) {
+                if (!khoanThuData.xoaKhoanThu(String.valueOf(khoanThu.getId())) || !nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Xóa khoản thu không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();

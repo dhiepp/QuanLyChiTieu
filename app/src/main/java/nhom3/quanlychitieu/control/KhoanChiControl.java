@@ -17,6 +17,7 @@ import java.util.Locale;
 
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.database.KhoanChiData;
+import nhom3.quanlychitieu.database.NguonTienData;
 import nhom3.quanlychitieu.model.KhoanChi;
 import nhom3.quanlychitieu.model.NguonTien;
 
@@ -24,9 +25,11 @@ public class KhoanChiControl {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
     private KhoanChiData khoanChiData;
+    private NguonTienData nguonTienData;
 
     public KhoanChiControl(Context context) {
         khoanChiData = new KhoanChiData(context);
+        nguonTienData = new NguonTienData(context);
     }
 
     public ArrayList<KhoanChi> getListKhoanChi() {
@@ -71,7 +74,6 @@ public class KhoanChiControl {
                 }
 
                 //Lấy nguồn tiền đã chọn
-                NguonTienControl nguonTienControl = new NguonTienControl(context);
                 NguonTien nguonTien = nguonTienArrayAdapter.getNguonTien(nguonTienSpinner.getSelectedItemPosition());
                 int tienChi = Integer.parseInt(soTien.getText().toString());
 
@@ -86,7 +88,7 @@ public class KhoanChiControl {
                 nguonTien.setSoDu(nguonTien.getSoDu() - tienChi);
 
                 //Xử lý ngoại lệ: thêm không thành công
-                if (!khoanChiData.themKhoanChi(khoanChi) || !nguonTienControl.suaNguonTien(nguonTien)) {
+                if (!khoanChiData.themKhoanChi(khoanChi) || !nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(context, "Thêm khoản chi không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();
@@ -113,8 +115,7 @@ public class KhoanChiControl {
         Button huyBtn = content.findViewById(R.id.XKH_huy);
 
         //Đặt nguồn tiền theo ID (Không cho thay đổi)
-        final NguonTienControl nguonTienControl = new NguonTienControl(context);
-        final NguonTien nguonTien = nguonTienControl.getNguonTienByID(khoanChi.getNtID());
+        final NguonTien nguonTien = nguonTienData.getNguonTienByID(khoanChi.getNtID());
         nguonTienTxt.setText(nguonTien.getTen());
         nguonTienTxt.setEnabled(false);
 
@@ -163,7 +164,7 @@ public class KhoanChiControl {
                 nguonTien.setSoDu(nguonTien.getSoDu() - tienChinh);
 
                 //Xử lý ngoại lệ: sửa không thành công
-                if (!khoanChiData.suaKhoanChi(khoanChi) || !nguonTienControl.suaNguonTien(nguonTien)) {
+                if (!khoanChiData.suaKhoanChi(khoanChi) || !nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Sửa khoản chi không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();
@@ -178,7 +179,7 @@ public class KhoanChiControl {
                 nguonTien.setSoDu(nguonTien.getSoDu() + tienChinh);
 
                 //Xử lý ngoại lệ: xóa không thành công
-                if (!khoanChiData.xoaKhoanChi(String.valueOf(khoanChi.getId())) || !nguonTienControl.suaNguonTien(nguonTien)) {
+                if (!khoanChiData.xoaKhoanChi(String.valueOf(khoanChi.getId())) || !nguonTienData.suaNguonTien(nguonTien)) {
                     Toast.makeText(dialog.getContext(), "Xóa khoản chi không thành công!", Toast.LENGTH_SHORT).show();
                 };
                 dialog.dismiss();

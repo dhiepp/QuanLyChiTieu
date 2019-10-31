@@ -19,6 +19,8 @@ import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.control.ThongKeControl;
 
 public class ThongKeFragment extends Fragment {
+    private ThongKeControl thongKeControl;
+
     private Context context;
 
     private RadioGroup radioGroup;
@@ -27,10 +29,7 @@ public class ThongKeFragment extends Fragment {
     private Button btnStart,btnEnd;
     private TextView tgStart, tgEnd;
 
-    ThongKeControl thongKeControl;
-
-    public ThongKeFragment() {
-    }
+    public ThongKeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

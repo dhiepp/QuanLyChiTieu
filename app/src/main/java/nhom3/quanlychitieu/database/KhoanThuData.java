@@ -25,7 +25,7 @@ public class KhoanThuData {
     }
 
     public ArrayList<KhoanThu> getAllKhoanThu() {
-        Cursor cursor = sqLiteDatabase.query("KHOANTHU",null,null,null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query("KHOANTHU",null,null,null,null,null,"ngay DESC");
         ArrayList<KhoanThu> arrayList= new ArrayList<KhoanThu>();
         arrayList.clear();
         while (cursor.moveToNext()){

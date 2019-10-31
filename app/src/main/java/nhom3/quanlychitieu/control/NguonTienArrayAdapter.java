@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 
+import nhom3.quanlychitieu.database.NguonTienData;
 import nhom3.quanlychitieu.model.NguonTien;
 
 public class NguonTienArrayAdapter extends ArrayAdapter<String> {
@@ -15,8 +16,8 @@ public class NguonTienArrayAdapter extends ArrayAdapter<String> {
     public NguonTienArrayAdapter(@NonNull Context context) {
         super(context, android.R.layout.simple_spinner_dropdown_item);
 
-        NguonTienControl nguonTienControl = new NguonTienControl(context);
-        nguonTienList = nguonTienControl.getListNguonTien();
+        NguonTienData nguonTienData = new NguonTienData(context);
+        nguonTienList = nguonTienData.getAllNguonTien();
         for (NguonTien nguonTien : nguonTienList) {
             super.add(nguonTien.getTen());
         }
