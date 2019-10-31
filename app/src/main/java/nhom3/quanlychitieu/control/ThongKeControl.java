@@ -19,7 +19,6 @@ import java.util.Locale;
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.database.KhoanChiData;
 import nhom3.quanlychitieu.database.KhoanThuData;
-import nhom3.quanlychitieu.view.ThongKeFragment;
 
 public class ThongKeControl implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);

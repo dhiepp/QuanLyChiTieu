@@ -32,6 +32,10 @@ public class KhoanThuControl {
         nguonTienData = new NguonTienData(context);
     }
 
+    public ArrayList<KhoanThu> getListKhoanThu() {
+        return khoanThuData.getAllKhoanThu();
+    }
+
     public void themKhoanThu(final View content, final AlertDialog dialog) {
         final Context context = content.getContext();
         final Spinner nguonTienSpinner = content.findViewById(R.id.TKH_nguon_tien);

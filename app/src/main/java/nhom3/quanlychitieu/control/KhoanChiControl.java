@@ -35,6 +35,7 @@ public class KhoanChiControl {
     public ArrayList<KhoanChi> getListKhoanChi() {
         return khoanChiData.getAllKhoanChi();
     }
+
     public void themKhoanChi(final View content, final AlertDialog dialog) {
         final Context context = content.getContext();
         final Spinner nguonTienSpinner = content.findViewById(R.id.TKH_nguon_tien);

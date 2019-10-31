@@ -6,9 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
-import nhom3.quanlychitieu.database.KhoanThuData;
-import nhom3.quanlychitieu.model.KhoanThu;
-import nhom3.quanlychitieu.database.DBConnection;
 
 import nhom3.quanlychitieu.database.DBConnection;
 import nhom3.quanlychitieu.view.KhoanChiFragment;

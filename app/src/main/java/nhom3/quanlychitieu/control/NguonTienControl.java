@@ -20,6 +20,10 @@ public class NguonTienControl {
         nguonTienData = new NguonTienData(context);
     }
 
+    public ArrayList<NguonTien> getListNguonTien() {
+        return nguonTienData.getAllNguonTien();
+    }
+
     public void themNguonTien(final View content, final AlertDialog dialog) {
         final EditText ten = content.findViewById(R.id.TNT_ten);
         final EditText mieuTa = content.findViewById(R.id.TNT_mieu_ta);
