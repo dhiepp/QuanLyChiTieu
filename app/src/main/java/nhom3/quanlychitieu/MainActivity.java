@@ -1,16 +1,11 @@
 package nhom3.quanlychitieu;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
-
-import java.util.Date;
-
 import nhom3.quanlychitieu.database.KhoanThuData;
 import nhom3.quanlychitieu.model.KhoanThu;
 import nhom3.quanlychitieu.database.DBConnection;
@@ -23,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private TabLayout tabLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
