@@ -6,130 +6,143 @@
     android:orientation="vertical"
     android:padding="14dp"
     tools:context=".view.ThongKeFragment">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Thống kê thu chi : "
-        android:textSize="24dp"/>
+        android:layout_gravity="center_horizontal"
+        android:text="Thống kê thu chi theo:"
+        android:textSize="20sp" />
 
     <RadioGroup
-        android:id="@+id/rg"
+        android:id="@+id/TK_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
         <RadioButton
-            android:checked="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:id="@+id/rb_all"
-            android:text="Tất cả"
-            android:textSize="20dp">
-        </RadioButton>
-        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Tất cả"
+            android:textSize="20dp"></RadioButton>
+
+        <RadioButton
             android:id="@+id/rb_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="32dp"
             android:text="Thời gian"
-            android:textSize="20dp"
-            android:layout_marginLeft="32dp">
-        </RadioButton>
+            android:textSize="20dp"></RadioButton>
     </RadioGroup>
 
     <LinearLayout
-        android:visibility="gone"
-        android:id="@+id/bg_linear"
-        android:layout_marginTop="16dp"
+        android:id="@+id/TK_thoi_gian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_marginTop="10dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal"
+        android:visibility="gone">
+
         <Button
-            android:layout_width="wrap_content"
             android:id="@+id/btnStart"
-            android:layout_height="wrap_content"
-            android:background="#00B2A0"
-            android:text="Bắt đầu"
-            android:minWidth="50dp"
-            android:textAllCaps="false"/>
-        <TextView
-            android:id="@+id/tvStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dd/mm/yyyy"
-            android:textSize="16dp"
-            android:textStyle="bold"
+            android:minWidth="70dp"
+            android:text="Bắt đầu"
+            android:textAllCaps="false" />
+
+        <TextView
+            android:id="@+id/tgStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="14dp"
-            />
+            android:text="dd-mm-yyyy"
+            android:textSize="16dp"
+            android:textStyle="bold" />
+
         <Button
             android:id="@+id/btnEnd"
             android:layout_width="wrap_content"
-            android:layout_marginLeft="14dp"
             android:layout_height="wrap_content"
-            android:background="#00B2A0"
-            android:text="Ket thuc"
-            android:minWidth="50dp"
-            android:textAllCaps="false"/>
+            android:layout_marginLeft="14dp"
+            android:minWidth="70dp"
+            android:text="Kết thúc"
+            android:textAllCaps="false" />
+
         <TextView
-            android:id="@+id/tvEnd"
+            android:id="@+id/tgEnd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="dd/mm/yyyy"
+            android:layout_marginLeft="14dp"
+            android:text="dd-mm-yyyy"
             android:textSize="16dp"
-            android:textStyle="bold"
-            android:layout_marginLeft="14dp"/>
+            android:textStyle="bold" />
     </LinearLayout>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Tổng thu : "
-        android:padding="14dp"
+        android:layout_marginTop="10dp"
         android:background="#00B2A0"
+        android:padding="14dp"
+        android:text="Tổng Thu:"
         android:textColor="#EBEBEB"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/TK_thu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="14dp"
         android:text="1,000,000 VND"
-        android:padding="14dp"
         android:textColor="#00B2A0"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chi Tiêu : "
-        android:padding="14dp"
         android:background="#00B2A0"
+        android:padding="14dp"
+        android:text="Tổng Chi:"
         android:textColor="#EBEBEB"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/TK_chi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="14dp"
         android:text="1,000,000 VND"
-        android:padding="14dp"
         android:textColor="#00B2A0"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cân đối : "
-        android:padding="14dp"
         android:background="#00B2A0"
+        android:padding="14dp"
+        android:text="Cân Đối:"
         android:textColor="#EBEBEB"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
+
     <TextView
+        android:id="@+id/TK_can_doi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="1,000,000 VND"
         android:padding="14dp"
+        android:text="1,000,000 VND"
         android:textColor="#00B2A0"
-        android:textStyle="bold"
-        android:textSize="18dp"/>
+        android:textSize="18dp"
+        android:textStyle="bold" />
 </LinearLayout>
 

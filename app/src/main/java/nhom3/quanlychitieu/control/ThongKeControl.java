@@ -9,69 +9,116 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 import nhom3.quanlychitieu.R;
+import nhom3.quanlychitieu.database.KhoanChiData;
+import nhom3.quanlychitieu.database.KhoanThuData;
+import nhom3.quanlychitieu.view.ThongKeFragment;
 
 public class ThongKeControl implements View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
-    RadioGroup rb;
-    RadioButton rb1,rb2;
-    Button b1,b2;
-    LinearLayout ln;
-    TextView tv1,tv2;
-    Context context;
+    private KhoanChiData khoanChiData;
+    private KhoanThuData khoanThuData;
 
-    int year, month, dayOfMonth;
-    Calendar calendar;
-    DatePickerDialog datePickerDialog;
+    private RadioGroup radioGroup;
+    private RadioButton rb_all, rb_time;
+    private LinearLayout thoiGian;
+    private Button btnStart,btnEnd;
+    private TextView tgStart, tgEnd, tongThu, tongChi, canDoi;
 
-    public ThongKeControl(RadioGroup rb,LinearLayout ln,Button b1,Button b2,TextView tv1, TextView tv2,Context context){
-        this.rb = rb;
-        this.ln = ln;
-        this.b1 = b1;
-        this.b2=b2;
-        this.tv1 = tv1;
-        this.tv2 = tv2;
+    private Context context;
+    Calendar calendarStart, calendarEnd;
+
+    public ThongKeControl(RadioGroup radioGroup, LinearLayout thoiGian, Button btnStart, Button btnEnd,
+            TextView tgStart, TextView tgEnd, TextView tongThu, TextView tongChi, TextView canDoi ,Context context){
+        khoanChiData = new KhoanChiData(context);
+        khoanThuData = new KhoanThuData(context);
+
+        this.radioGroup = radioGroup;
+        this.thoiGian = thoiGian;
+        this.btnStart = btnStart;
+        this.btnEnd = btnEnd;
+        this.tgStart = tgStart;
+        this.tgEnd = tgEnd;
         this.context = context;
+        this.tongThu = tongThu;
+        this.tongChi = tongChi;
+        this.canDoi = canDoi;
+
+        calendarStart = Calendar.getInstance();
+        calendarEnd = Calendar.getInstance();
+        updateData();
     }
 
     @Override
     public void onClick(View view) {
-        calendar = Calendar.getInstance();
-        year= calendar.get(Calendar.YEAR);
-        month=calendar.get(Calendar.MONTH);
-        dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+        Calendar now = Calendar.getInstance();
+        int year = now.get(Calendar.YEAR);
+        int month = now.get(Calendar.MONTH);
+        int dayOfMonth = now.get(Calendar.DAY_OF_MONTH);
        switch (view.getId()){
            case R.id.btnStart :
-               datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+               new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                    @Override
                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                        tv1.setText(day+"-"+(month+1)+"-"+year);
+                       calendarStart.set(year, month, day);
+                       tgStart.setText(dateFormat.format(calendarStart.getTime()));
+
+                       updateDataByDate();
                    }
-               },year,month,dayOfMonth);
-               datePickerDialog.show();
+               },year,month,dayOfMonth).show();
                break;
            case R.id.btnEnd :
-               datePickerDialog = new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
+               new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                    @Override
                    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-                       tv2.setText(day+"-"+(month+1)+"-"+year);
+                       calendarEnd.set(year, month, day);
+                       tgEnd.setText(dateFormat.format(calendarEnd.getTime()));
+
+                       int thu = khoanThuData.getTongAllKhoanThu();
+                       int chi = khoanChiData.getTongAllKhoanChi();
+                       updateDataByDate();
                    }
-               },year,month,dayOfMonth);
-               datePickerDialog.show();
+               },year,month,dayOfMonth).show();
                break;
-       }
+        }
     }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int i) {
         if(i==R.id.rb_all){
-            ln.setVisibility(View.GONE);
-
+            thoiGian.setVisibility(View.GONE);
+            updateData();
         }else{
-            ln.setVisibility(View.VISIBLE);
+            thoiGian.setVisibility(View.VISIBLE);
+
         }
+    }
+
+    private void updateData() {
+        int thu = khoanThuData.getTongAllKhoanThu();
+        int chi = khoanChiData.getTongAllKhoanChi();
+        tongThu.setText(NumberFormat.getInstance().format(thu) + " đ");
+        tongChi.setText(NumberFormat.getInstance().format(chi) + " đ");
+        canDoi.setText(NumberFormat.getInstance().format(thu-chi) + " đ");
+    }
+
+    private void updateDataByDate() {
+        Date dateStart = calendarStart.getTime();
+        Date dateEnd = calendarEnd.getTime();
+        int thu = khoanThuData.getTongKhoanThuByDate(dateStart, dateEnd);
+        int chi = khoanChiData.getTongKhoanChiByDate(dateStart, dateEnd);
+
+        tongThu.setText(NumberFormat.getInstance().format(thu) + " đ");
+        tongChi.setText(NumberFormat.getInstance().format(chi) + " đ");
+        canDoi.setText(NumberFormat.getInstance().format(thu-chi) + " đ");
     }
 
 

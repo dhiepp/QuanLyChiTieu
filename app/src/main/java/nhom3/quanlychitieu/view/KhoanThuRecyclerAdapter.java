@@ -1,6 +1,7 @@
 package nhom3.quanlychitieu.view;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -80,7 +81,9 @@ public class KhoanThuRecyclerAdapter extends RecyclerView.Adapter<KhoanThuRecycl
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Random random = new Random();
                 int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-                icon.getBackground().setTint(color);
+                Drawable drawable = v.getContext().getDrawable(R.drawable.ic_monetization_on_black_24dp).mutate();
+                drawable.setTint(color);
+                icon.setBackground(drawable);
             }
         }
     }

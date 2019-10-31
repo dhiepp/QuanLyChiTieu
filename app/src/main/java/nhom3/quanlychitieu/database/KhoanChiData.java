@@ -25,7 +25,6 @@ public class KhoanChiData {
         dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     }
 
-
     public ArrayList<KhoanChi> getAllKhoanChi() {
         Cursor cursor = sqLiteDatabase.query("KHOANCHI",null,null,null,null,null,null);
         ArrayList<KhoanChi> arrayList= new ArrayList<KhoanChi>();
@@ -50,7 +49,33 @@ public class KhoanChiData {
             arrayList.add(khoanChi);
         }
         cursor.close();
-        return  arrayList;
+        return arrayList;
+    }
+
+    public int getTongAllKhoanChi() {
+        String[] columns = new String[] {"so_tien"};
+        int tong = 0;
+        Cursor cursor = sqLiteDatabase.query("KHOANCHI", columns, null, null,null,null,null);
+
+        while (cursor.moveToNext()){
+            tong += cursor.getInt(0);
+        }
+        cursor.close();
+        return tong;
+    }
+
+    public int getTongKhoanChiByDate(Date startDate, Date endDate) {
+        String[] columns = new String[] {"so_tien"};
+        String selection = "ngay >= ? AND ngay <= ?";
+        String[] selectionArgs = new String[] {dateFormat.format(startDate), dateFormat.format(endDate)};
+        int tong = 0;
+        Cursor cursor = sqLiteDatabase.query("KHOANCHI", columns, selection,selectionArgs,null,null,null);
+
+        while (cursor.moveToNext()){
+            tong += cursor.getInt(0);
+        }
+        cursor.close();
+        return tong;
     }
 
     public boolean xoaKhoanChi(String id) {

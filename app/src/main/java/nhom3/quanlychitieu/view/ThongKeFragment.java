@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.google.android.material.tabs.TabLayout;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -22,12 +21,11 @@ import nhom3.quanlychitieu.control.ThongKeControl;
 public class ThongKeFragment extends Fragment {
     private Context context;
 
-
-    private LinearLayout ln;
-    private RadioGroup rg;
-    private RadioButton rb1,rb2;
-    private Button btStart,btEnd;
-    private TextView tv1, tv2;
+    private RadioGroup radioGroup;
+    private RadioButton rb_all, rb_time;
+    private LinearLayout thoiGian;
+    private Button btnStart,btnEnd;
+    private TextView tgStart, tgEnd;
 
     ThongKeControl thongKeControl;
 
@@ -41,19 +39,22 @@ public class ThongKeFragment extends Fragment {
         View root = inflater.inflate(R.layout.fragment_thong_ke, container, false);
         context = root.getContext();
 
-        ln = root.findViewById(R.id.bg_linear);
-        rg = root.findViewById(R.id.rg);
-        rb1 = root.findViewById(R.id.rb_all);
-        rb2 = root.findViewById(R.id.rb_time);
-        btStart = root.findViewById(R.id.btnStart);
-        btEnd = root.findViewById(R.id.btnEnd);
-        tv1 = root.findViewById(R.id.tvStart);
-        tv2 = root.findViewById(R.id.tvEnd);
+        radioGroup = root.findViewById(R.id.TK_rg);
+        rb_all = root.findViewById(R.id.rb_all);
+        rb_time = root.findViewById(R.id.rb_time);
+        thoiGian = root.findViewById(R.id.TK_thoi_gian);
+        btnStart = root.findViewById(R.id.btnStart);
+        btnEnd = root.findViewById(R.id.btnEnd);
+        tgStart = root.findViewById(R.id.tgStart);
+        tgEnd = root.findViewById(R.id.tgEnd);
+        TextView tongThu = root.findViewById(R.id.TK_thu);
+        TextView tongChi = root.findViewById(R.id.TK_chi);
+        TextView canDoi = root.findViewById(R.id.TK_can_doi);
+        thongKeControl = new ThongKeControl(radioGroup,thoiGian,btnStart,btnEnd,tgStart,tgEnd, tongThu, tongChi, canDoi, context);
+        radioGroup.setOnCheckedChangeListener(thongKeControl);
+        btnStart.setOnClickListener(thongKeControl);
+        btnEnd.setOnClickListener(thongKeControl);
 
-        thongKeControl = new ThongKeControl(rg,ln,btStart,btEnd,tv1,tv2,context);
-        rg.setOnCheckedChangeListener(thongKeControl);
-        btStart.setOnClickListener(thongKeControl);
-        btEnd.setOnClickListener(thongKeControl);
 
         return root;
     }
@@ -61,6 +62,6 @@ public class ThongKeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        rb1.setChecked(true);
+//        rb1.setChecked(true);
     }
 }

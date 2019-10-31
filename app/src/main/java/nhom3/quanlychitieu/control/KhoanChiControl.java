@@ -10,8 +10,10 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Locale;
 
 import nhom3.quanlychitieu.R;
 import nhom3.quanlychitieu.database.KhoanChiData;
@@ -19,6 +21,8 @@ import nhom3.quanlychitieu.model.KhoanChi;
 import nhom3.quanlychitieu.model.NguonTien;
 
 public class KhoanChiControl {
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
+
     private KhoanChiData khoanChiData;
 
     public KhoanChiControl(Context context) {
@@ -29,7 +33,7 @@ public class KhoanChiControl {
         return khoanChiData.getAllKhoanChi();
     }
     public void themKhoanChi(final View content, final AlertDialog dialog) {
-        final Context context = dialog.getContext();
+        final Context context = content.getContext();
         final Spinner nguonTienSpinner = content.findViewById(R.id.TKH_nguon_tien);
         final Button ngayBtn = content.findViewById(R.id.TKH_ngay);
         final EditText hangMuc = content.findViewById(R.id.TKH_hang_muc);
@@ -43,14 +47,15 @@ public class KhoanChiControl {
 
         //Xử lý chọn ngày
         final Calendar selectedDate = Calendar.getInstance();
+        ngayBtn.setText(dateFormat.format(selectedDate.getTime()));
         ngayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        ngayBtn.setText(dayOfMonth + "-" + month + "-" + year);
                         selectedDate.set(year, month, dayOfMonth);
+                        ngayBtn.setText(dateFormat.format(selectedDate.getTime()));
                     }
                 }, selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DAY_OF_MONTH)).show();
             }
@@ -97,7 +102,7 @@ public class KhoanChiControl {
     }
 
     public void xemKhoanChi(final View content, final AlertDialog dialog, final KhoanChi khoanChi) {
-        final Context context = dialog.getContext();
+        final Context context = content.getContext();
         final EditText nguonTienTxt = content.findViewById(R.id.XKH_nguon_tien);
         final Button ngayBtn = content.findViewById(R.id.XKH_ngay);
         final EditText hangMuc = content.findViewById(R.id.XKH_hang_muc);
@@ -122,14 +127,15 @@ public class KhoanChiControl {
         //Xử lý chọn ngày
         final Calendar selectedDate = Calendar.getInstance();
         selectedDate.setTime(khoanChi.getNgay());
+        ngayBtn.setText(dateFormat.format(selectedDate.getTime()));
         ngayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new DatePickerDialog(context, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        ngayBtn.setText(dayOfMonth + "-" + month + "-" + year);
                         selectedDate.set(year, month, dayOfMonth);
+                        ngayBtn.setText(dateFormat.format(selectedDate.getTime()));
                     }
                 }, selectedDate.get(Calendar.YEAR), selectedDate.get(Calendar.MONTH), selectedDate.get(Calendar.DAY_OF_MONTH)).show();
             }
