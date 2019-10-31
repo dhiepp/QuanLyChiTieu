@@ -15,7 +15,7 @@
         android:textSize="20sp" />
 
     <RadioGroup
-        android:id="@+id/TK_rg"
+        android:id="@+id/TKE_rg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -40,7 +40,7 @@
     </RadioGroup>
 
     <LinearLayout
-        android:id="@+id/TK_thoi_gian"
+        android:id="@+id/TKE_thoi_gian"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
@@ -96,7 +96,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/TK_thu"
+        android:id="@+id/TKE_thu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="14dp"
@@ -116,7 +116,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/TK_chi"
+        android:id="@+id/TKE_chi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="14dp"
@@ -136,7 +136,7 @@
         android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/TK_can_doi"
+        android:id="@+id/TKE_can_doi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="14dp"

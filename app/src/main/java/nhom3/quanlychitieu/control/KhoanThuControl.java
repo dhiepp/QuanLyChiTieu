@@ -24,10 +24,12 @@ import nhom3.quanlychitieu.model.NguonTien;
 public class KhoanThuControl {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy", Locale.US);
 
+    private Context context;
     private KhoanThuData khoanThuData;
     private NguonTienData nguonTienData;
 
     public KhoanThuControl(Context context) {
+        this.context = context;
         khoanThuData = new KhoanThuData(context);
         nguonTienData = new NguonTienData(context);
     }
@@ -37,7 +39,6 @@ public class KhoanThuControl {
     }
 
     public void themKhoanThu(final View content, final AlertDialog dialog) {
-        final Context context = content.getContext();
         final Spinner nguonTienSpinner = content.findViewById(R.id.TKH_nguon_tien);
         final Button ngayBtn = content.findViewById(R.id.TKH_ngay);
         final EditText hangMuc = content.findViewById(R.id.TKH_hang_muc);
@@ -105,7 +106,6 @@ public class KhoanThuControl {
     }
 
     public void xemKhoanThu(final View content, final AlertDialog dialog, final KhoanThu khoanThu) {
-        final Context context = content.getContext();
         final EditText nguonTienTxt = content.findViewById(R.id.XKH_nguon_tien);
         final Button ngayBtn = content.findViewById(R.id.XKH_ngay);
         final EditText hangMuc = content.findViewById(R.id.XKH_hang_muc);

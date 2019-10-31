@@ -27,7 +27,6 @@ public class KhoanChiFragment extends Fragment {
     private KhoanChiRecyclerAdapter khoanChiRecyclerAdapter;
 
     private Context context;
-    private FloatingActionButton addBtn;
 
     public KhoanChiFragment() {}
 
@@ -39,10 +38,10 @@ public class KhoanChiFragment extends Fragment {
         khoanChiControl = new KhoanChiControl(context);
         khoanChiRecyclerAdapter = new KhoanChiRecyclerAdapter(this);
 
-        addBtn = root.findViewById(R.id.KC_add);
+        FloatingActionButton addBtn = root.findViewById(R.id.KC_add);
+        RecyclerView listData = root.findViewById(R.id.KC_list);
 
         //Xử lý hiển thị danh sách khoản chi
-        RecyclerView listData = root.findViewById(R.id.KC_list);
         listData.setAdapter(khoanChiRecyclerAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         listData.setLayoutManager(layoutManager);

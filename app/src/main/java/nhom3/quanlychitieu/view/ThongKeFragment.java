@@ -6,11 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
@@ -21,38 +18,35 @@ public class ThongKeFragment extends Fragment {
     private ThongKeControl thongKeControl;
 
     private Context context;
-
-    private RadioGroup radioGroup;
-    private RadioButton rb_all, rb_time;
-    private LinearLayout thoiGian;
-    private Button btnStart,btnEnd;
-    private TextView tgStart, tgEnd;
+    RadioGroup radioGroup;
+    private LinearLayout thoiGianLayout;
 
     public ThongKeFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_thong_ke, container, false);
         context = root.getContext();
+        thongKeControl = new ThongKeControl(context, root);
 
-        radioGroup = root.findViewById(R.id.TK_rg);
-        rb_all = root.findViewById(R.id.rb_all);
-        rb_time = root.findViewById(R.id.rb_time);
-        thoiGian = root.findViewById(R.id.TK_thoi_gian);
-        btnStart = root.findViewById(R.id.btnStart);
-        btnEnd = root.findViewById(R.id.btnEnd);
-        tgStart = root.findViewById(R.id.tgStart);
-        tgEnd = root.findViewById(R.id.tgEnd);
-        TextView tongThu = root.findViewById(R.id.TK_thu);
-        TextView tongChi = root.findViewById(R.id.TK_chi);
-        TextView canDoi = root.findViewById(R.id.TK_can_doi);
-        thongKeControl = new ThongKeControl(radioGroup,thoiGian,btnStart,btnEnd,tgStart,tgEnd, tongThu, tongChi, canDoi, context);
-        radioGroup.setOnCheckedChangeListener(thongKeControl);
-        btnStart.setOnClickListener(thongKeControl);
-        btnEnd.setOnClickListener(thongKeControl);
+        radioGroup = root.findViewById(R.id.TKE_rg);
+        thoiGianLayout = root.findViewById(R.id.TKE_thoi_gian);
 
+        //Xử lý chọn tiêu chí thống kê khi click
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.rb_all) {
+                    thoiGianLayout.setVisibility(View.GONE);
+                    thongKeControl.updateData();
+                }
+                if (checkedId == R.id.rb_time) {
+                    thoiGianLayout.setVisibility(View.VISIBLE);
+                    thongKeControl.updateDataByDate();
+                }
+            }
+        });
 
         return root;
     }
@@ -60,6 +54,17 @@ public class ThongKeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        rb1.setChecked(true);
+
+        //Khi resume kiểm tra xem đang chọn tiêu chí nào và update data tương ứng
+        int checkedId = radioGroup.getCheckedRadioButtonId();
+        if (checkedId == R.id.rb_all) {
+            thoiGianLayout.setVisibility(View.GONE);
+            thongKeControl.updateData();
+        }
+        if (checkedId == R.id.rb_time) {
+            thoiGianLayout.setVisibility(View.VISIBLE);
+            thongKeControl.updateDataByDate();
+        }
+
     }
 }

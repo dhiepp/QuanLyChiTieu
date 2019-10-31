@@ -29,7 +29,6 @@ public class NguonTienFragment extends Fragment {
 
     private Context context;
     private TextView tong;
-    private FloatingActionButton addBtn;
 
     public NguonTienFragment() {}
 
@@ -42,10 +41,10 @@ public class NguonTienFragment extends Fragment {
         nguonTienRecyclerAdapter = new NguonTienRecyclerAdapter(this);
 
         tong = root.findViewById(R.id.NT_total);
-        addBtn = root.findViewById(R.id.NT_add);
+        FloatingActionButton addBtn = root.findViewById(R.id.NT_add);
+        RecyclerView listData = root.findViewById(R.id.NT_list);
 
         //Xử lý hiển thị danh sách nguồn tiền
-        RecyclerView listData = root.findViewById(R.id.NT_list);
         listData.setAdapter(nguonTienRecyclerAdapter);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         listData.setLayoutManager(layoutManager);
