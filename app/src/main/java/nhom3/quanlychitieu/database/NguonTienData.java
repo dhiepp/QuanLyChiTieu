@@ -41,8 +41,8 @@ public class NguonTienData {
     }
 
     public NguonTien getNguonTienByID(int id) {
-        Cursor cursor = sqLiteDatabase.query("NGUONTIEN",null,"id=" + id,
-                null,null,null,null);
+        Cursor cursor = sqLiteDatabase.query("NGUONTIEN",null,"id= ?",
+                new String[]{"" +id},null,null,null);
         NguonTien nguonTien = null;
         while (cursor.moveToNext()){
             String ten = cursor.getString(1);
