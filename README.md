@@ -2,7 +2,7 @@
 
 Ứng dụng quản lý chi tiêu trên Android
 
-**Danh sách nguồn tiền**: Xem và quản lý những nguồn tiền (tài khoản, tiền mặt...)
+**Danh sách nguồn tiền**: Xem và quản lý những nguồn tiền (tài khoản, tiền mặt...)  
 <img src="demo/demo1.png" width="300">
 
 **Khoản thu**: Xem và quản lý thu nhập đầu vào  
